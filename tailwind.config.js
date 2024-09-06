@@ -32,7 +32,8 @@ export default {
       padding: {
         input_padding: "8px",
         button_padding: "12px",
-        padding_base: "32px"
+        padding_base: "32px",
+        padding_small: "8px"
       },
       borderRadius: {
         rounded_primary: '8px',
