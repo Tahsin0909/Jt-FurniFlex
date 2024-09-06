@@ -20,7 +20,9 @@ export default {
         m_lg: '32px',
       },
       gap: {
-        gap_base: "16px"
+
+        gap_base: "16px",
+        gap_primary: "20px"
       },
       fontSize: {
         text_small: '13px',
@@ -33,7 +35,10 @@ export default {
         input_padding: "8px",
         button_padding: "12px",
         padding_base: "32px",
-        padding_small: "8px"
+        padding_small: "8px",
+        padding_medium: "12px",
+        padding_lg: "20px",
+        padding_xl: "120px"
       },
       borderRadius: {
         rounded_primary: '8px',
@@ -42,10 +47,16 @@ export default {
 
       },
       height: {
+        h_base: "20px",
+        h_medium: "48px",
         h_110vh: "110vh"
 
       },
       width: {
+        w_base: "20px",
+        w_medium: "48px",
+        w_drawer:"300px",
+        w_logo: "144px",
         w_445px: "445px",
       }
 
