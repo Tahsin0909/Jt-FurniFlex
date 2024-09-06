@@ -26,33 +26,33 @@ const LogIn = () => {
 
     return (
         <div className="grid grid-cols-2">
-            <div className=" h-[110vh] flex flex-row items-center justify-center">
-                <div className=" p-8 rounded-lg bg-[#FAFAFA]">
+            <div className=" h-h_110vh flex flex-row items-center justify-center">
+                <div className=" p-padding_base rounded-rounded_primary bg-secondary">
                     <div className="flex flex-col">
-                        <p className="font-semibold text-3xl">Welcome Back!</p>
-                        <p className="mt-1">Enter your Credentials to access your account</p>
+                        <p className="font-semibold text-text_primary">Welcome Back!</p>
+                        <p className="mt-m_small">Enter your Credentials to access your account</p>
                     </div>
                     <div className="">
-                        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-3 mt-8">
+                        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-gap_base mt-m_lg">
 
-                            <div className="flex flex-col space-y-1 border p-2 focus-within:border-blue-600 rounded-lg bg-white">
-                                <label className="text-[13px] text-gray-500">Email address</label>
+                            <div className="flex flex-col space-y-1 border p-input_padding focus-within:border-primary rounded-rounded_primary bg-white">
+                                <label className="text-text_small text-gray-500">Email address</label>
                                 <input
                                     {...register("email", { required: true })}
                                     type="email"
                                     placeholder="john@doe.com"
                                     className="focus:outline-none"
                                 />
-                                {errors.email && <span className="text-red-500 text-xs mt-1">Email field is required</span>}
+                                {errors.email && <span className="text-error text-xs mt-m_small">Email field is required</span>}
                             </div>
-                            <div className="relative flex flex-col space-y-1 border p-2 focus-within:border-blue-600 rounded-lg bg-white">
-                                <label className="text-[13px] text-gray-500">Password</label>
+                            <div className="relative flex flex-col space-y-1 border p-input_padding focus-within:border-primary rounded-rounded_primary bg-white">
+                                <label className="text-text_small text-gray-500">Password</label>
                                 <input
                                     {...register("password", {
                                         required: "Password is required!",
                                         minLength: {
-                                            value: 8,
-                                            message: "Password must be at least 8 characters long!"
+                                            value: 6,
+                                            message: "Password must be at least 6 characters long!"
                                         },
                                         validate: {
                                             hasUpperCase: (value) =>
@@ -66,7 +66,7 @@ const LogIn = () => {
                                     className="focus:outline-none"
                                 />
                                 {errors.password && (
-                                    <div className="text-red-500 text-xs mt-1">
+                                    <div className="text-error text-xs mt-m_small">
                                         {errors.password.message}
                                         {errors.password.hasUpperCase && (
                                             <div>{errors.password.hasUpperCase}</div>
@@ -84,31 +84,31 @@ const LogIn = () => {
                                     )}
                                 </div>
                             </div>
-                            <p className="text-end text-[#1E99F5] hover:underline">Forget Password</p>
+                            <p className="text-end text-primary hover:underline">Forget Password</p>
 
-                            <input className="border p-3 rounded-lg bg-black text-white active:scale-95 transition-all ease-linear" type="submit" value={"Sign In"} />
+                            <input className="border p-button_padding rounded-rounded_primary bg-black text-white active:scale-95 transition-all ease-linear" type="submit" value={"Sign In"} />
                         </form>
                     </div>
                     {/* divider  */}
-                    <div className="my-4 flex items-center gap-4">
+                    <div className="my-m_primary flex items-center gap-gap_base">
                         <hr className="w-full border-gray-300" />
                         <p className="text-sm text-gray-800 text-center">or</p>
                         <hr className="w-full border-gray-300" />
                     </div>
                     {/* social SignUp  */}
-                    <div className="grid grid-cols-2 items-center gap-4">
+                    <div className="grid grid-cols-2 items-center gap-gap_base">
                         {/* google authentication  */}
-                        <div className="flex items-center justify-center gap-2 border p-3 rounded-lg hover:shadow-md">
+                        <div className="flex items-center justify-center gap-2 border p-button_padding rounded-rounded_primary hover:shadow-md">
                             <FcGoogle size={25} />
                             <span>Sign in with Google</span>
                         </div>
                         {/* apple authentication  */}
-                        <div className="flex items-center justify-center gap-2 border p-3 rounded-lg hover:shadow-md">
+                        <div className="flex items-center justify-center gap-2 border p-button_padding rounded-rounded_primary hover:shadow-md">
                             <FaApple size={25} />
                             <span>Sign in with Google</span>
                         </div>
                     </div>
-                    <p className="text-gray-800 text-sm mt-6 text-center font-semibold">Don't Have an account? <Link to="/SignUp" className="text-blue-600 font-semibold hover:underline ml-1">Sign Up</Link></p>
+                    <p className="text-gray-800 text-sm mt-m_secondary text-center font-semibold">Don't Have an account? <Link to="/SignUp" className="text-primary font-semibold hover:underline ml-1">Sign Up</Link></p>
                 </div>
             </div>
             <div className="w-full">
@@ -118,11 +118,11 @@ const LogIn = () => {
                         backgroundSize: 'cover',
                         backgroundPosition: 'center'
                     }}
-                    className="flex flex-col items-center justify-center h-[110vh] space-y-2 "
+                    className="flex flex-col items-center justify-center h-h_110vh space-y-2 "
                 >
                     <img src={icon} alt="icon" />
                     <CompanyName textColor={"text-white"} />
-                    <p className="text-lg text-white w-[445px] text-center">
+                    <p className="text-lg text-white w-w_445px text-center">
                         Discover a seamless shopping experience with our curated collection of products. From fashion to electronics, we bring quality.
                     </p>
                 </div>

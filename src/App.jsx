@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <div>
-      <h1 className="text-3xl font-bold underline text-red-500">
+      <h1 className="text-text_primary font-bold underline text-error">
       Hello world!
     </h1>
         <a href="https://vitejs.dev" target="_blank">

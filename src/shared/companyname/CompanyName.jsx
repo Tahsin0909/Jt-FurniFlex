@@ -3,8 +3,8 @@
 const CompanyName = ({textColor}) => {
     return (
         <div>
-            <p className={`${textColor} font-bold text-4xl`} >
-                Furni<span className="text-blue-400">Flex</span>
+            <p className={`${textColor} font-bold text-text_secondary`} >
+                Furni<span className="text-primary">Flex</span>
             </p>
         </div>
     );
