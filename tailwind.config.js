@@ -9,6 +9,7 @@ export default {
       colors: {
         primary: '#1E99F5',
         secondary: '#FAFAFA',
+        activeNav: "#F8F8F8",
         error: "#ef4444"
       },
       margin: {

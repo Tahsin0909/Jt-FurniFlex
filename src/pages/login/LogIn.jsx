@@ -25,7 +25,7 @@ const LogIn = () => {
     };
 
     return (
-        <div className="grid grid-cols-2">
+        <div className="grid lg:grid-cols-2">
             <div className=" h-h_110vh flex flex-row items-center justify-center">
                 <div className=" p-padding_base rounded-rounded_primary bg-secondary">
                     <div className="flex flex-col">
@@ -100,18 +100,18 @@ const LogIn = () => {
                         {/* google authentication  */}
                         <div className="flex items-center justify-center gap-2 border p-button_padding rounded-rounded_primary hover:shadow-md">
                             <FcGoogle size={25} />
-                            <span>Sign in with Google</span>
+                            <span className="md:text-base text-text_small">Sign in with Google</span>
                         </div>
                         {/* apple authentication  */}
                         <div className="flex items-center justify-center gap-2 border p-button_padding rounded-rounded_primary hover:shadow-md">
                             <FaApple size={25} />
-                            <span>Sign in with Google</span>
+                            <span className="md:text-base text-text_small">Sign in with Google</span>
                         </div>
                     </div>
                     <p className="text-gray-800 text-sm mt-m_secondary text-center font-semibold">Don't Have an account? <Link to="/SignUp" className="text-primary font-semibold hover:underline ml-1">Sign Up</Link></p>
                 </div>
             </div>
-            <div className="w-full">
+            <div className="w-full hidden lg:block">
                 <div
                     style={{
                         backgroundImage: `url(${SideImage})`,

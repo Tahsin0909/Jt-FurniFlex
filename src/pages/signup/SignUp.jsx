@@ -31,7 +31,7 @@ const SignUp = () => {
     };
 
     return (
-        <div className="grid grid-cols-2">
+        <div className="grid lg:grid-cols-2">
             {/* Left form section */}
             <div className="flex flex-row items-center justify-center">
                 <div className="p-padding_base rounded-rounded_primary bg-secondary">
@@ -151,12 +151,12 @@ const SignUp = () => {
                         {/* Google sign-in button */}
                         <div className="flex items-center justify-center gap-2 border p-button_padding rounded-rounded_primary hover:shadow-md">
                             <FcGoogle size={25} />
-                            <span>Sign in with Google</span>
+                            <span className="md:text-base text-text_small">Sign in with Google</span>
                         </div>
                         {/* Apple sign-in button */}
                         <div className="flex items-center justify-center gap-2 border p-button_padding rounded-rounded_primary hover:shadow-md">
                             <FaApple size={25} />
-                            <span>Sign in with Apple</span>
+                            <span className="md:text-base text-text_small">Sign in with Apple</span>
                         </div>
                     </div>
 
@@ -168,7 +168,7 @@ const SignUp = () => {
             </div>
 
             {/* Right side background image section */}
-            <div className="w-full">
+            <div className="w-full hidden lg:block">
                 <div
                     style={{
                         backgroundImage: `url(${SideImage})`,
