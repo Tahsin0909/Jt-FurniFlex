@@ -3,14 +3,26 @@ import SideImage from "../../assets/sideImage.png";
 import icon from '../../assets/icon.png';
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-
+import { FaApple, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 const LogIn = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, clearErrors, setError } = useForm();
 
+    // handle checkbox 
+    const handleCheckboxChange = (e) => {
+        if (e.target.checked) {
+            clearErrors("terms"); // Clear the error when the checkbox is checked
+        } else {
+            setError("terms", { type: "manual" }); // Set error if unchecked
+        }
+    };
 
+    // handle form submit 
     const onSubmit = data => console.log(data);
+
+
+
 
     // handle show password 
     const [showPassword, setShowPassword] = useState(false);
@@ -80,13 +92,43 @@ const LogIn = () => {
                                     )}
                                 </div>
                             </div>
+                            <div>
+                                <div className="flex items-center">
+                                    <input onChange={handleCheckboxChange}
+                                        {...register("terms", { required: true })}
+                                        id="terms&policy" name="terms" type="checkbox" className="h-4 w-4 bg-black  shrink-0 text-black focus:ring-black border-gray-300 rounded" />
+                                    <label className="text-gray-800 ml-3 block text-sm font-semibold">
+                                        I agree to the <a href="" className="text-black underline  hover:underline ml-1">Terms and Policy</a>
+                                    </label>
+                                </div>
+                                {errors.terms && <span className="text-red-500 text-xs mt-1">Please accept Terms and Policy </span>}
+                            </div>
 
 
 
 
-                            <input type="submit" />
+                            <input className="border p-3 rounded-lg bg-black text-white active:scale-95 transition-all ease-linear" type="submit" />
                         </form>
                     </div>
+                    <div className="my-4 flex items-center gap-4">
+                        <hr className="w-full border-gray-300" />
+                        <p className="text-sm text-gray-800 text-center">or</p>
+                        <hr className="w-full border-gray-300" />
+                    </div>
+                    {/* social login  */}
+                    <div className="grid grid-cols-2 items-center gap-4">
+                        {/* google authentication  */}
+                        <div className="flex items-center justify-center gap-2 border p-3 rounded-lg hover:shadow-md">
+                            <FcGoogle size={25} />
+                            <span>Sign in with Google</span>
+                        </div>
+                        {/* apple authentication  */}
+                        <div className="flex items-center justify-center gap-2 border p-3 rounded-lg hover:shadow-md">
+                            <FaApple size={25} />
+                            <span>Sign in with Google</span>
+                        </div>
+                    </div>
+                    <p className="text-gray-800 text-sm mt-6 text-center font-semibold">Have an account? <a href="" className="text-blue-600 font-semibold hover:underline ml-1">Sign In</a></p>
                 </div>
             </div>
             <div className="w-full">
