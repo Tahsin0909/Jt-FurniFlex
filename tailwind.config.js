@@ -10,6 +10,7 @@ export default {
         primary: '#1E99F5',
         secondary: '#FAFAFA',
         activeNav: "#F8F8F8",
+        footer_link: "#81859F",
         error: "#ef4444"
       },
       margin: {
@@ -18,6 +19,7 @@ export default {
         m_primary: '16px',
         m_secondary: '24px',
         m_lg: '32px',
+        m_xl: '60px',
       },
       gap: {
 
@@ -37,7 +39,8 @@ export default {
         padding_base: "32px",
         padding_small: "8px",
         padding_medium: "12px",
-        padding_lg: "20px",
+        padding_md: "20px",
+        padding_lg: "60px",
         padding_xl: "120px"
       },
       borderRadius: {

@@ -15,7 +15,7 @@ const Navbar = () => {
 
     // Toggles the menu open/close
     const handleClick = () => {
-        setIsOpen(prev => !prev);
+        setIsOpen(!isOpen);
     };
 
     // Closes the menu if the user clicks outside of it
@@ -66,7 +66,7 @@ const Navbar = () => {
     };
 
     return (
-        <header className='flex border-b py-padding_lg lg:px-padding_xl sm:px-padding_small bg-white tracking-wide relative'>
+        <header className='flex border-b py-padding_md lg:px-padding_xl sm:px-padding_small p-padding_medium bg-white tracking-wide relative'>
             <div className='flex flex-wrap items-center justify-between gap-gap_primary w-full'>
                 <Link to={'/'}>
                     {/* Logo visible when the menu is not open */}
@@ -75,9 +75,9 @@ const Navbar = () => {
 
                 {/* Collapsible menu and navbar */}
                 <div id="collapseMenu"
-                    className={`${isOpen ? 'block' : 'hidden'} max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:z-50 lg:!block`}
+                    className={`${isOpen ? 'block' : 'hidden'}  max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:z-50 lg:!block`}
                 >
-                    <ul ref={ref} className='lg:flex gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-w_drawer max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50'>
+                    <ul ref={ref} className='lg:flex gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-w_drawer max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50 '>
                         {/* Logo inside the collapsible menu */}
                         <li className='mb-6 hidden max-lg:block'>
                             <Link to={'/'}>
