@@ -87,13 +87,13 @@ const Navbar = () => {
 
                         {/* Navigation links */}
                         <li className='max-lg:border-b border-gray-300 max-lg:py-padding_medium px-padding_medium'>
-                            <Link onClick={() => handleActiveNav('/')} className={` ${selected === '/' ? "p-padding_medium rounded-rounded_primary font-semibold bg-activeNav" : ""} hover:bg-activeNav p-padding_medium rounded-rounded_primary`}>Home</Link>
+                            <Link onClick={() => handleActiveNav('/')} to={'/'} className={` ${selected === '/' ? "p-padding_medium rounded-rounded_primary font-semibold bg-activeNav" : ""} hover:bg-activeNav p-padding_medium rounded-rounded_primary`}>Home</Link>
                         </li>
                         <li className='max-lg:border-b border-gray-300 max-lg:py-padding_medium px-padding_medium'>
-                            <Link onClick={() => handleActiveNav('/products')} className={` ${selected === '/products' ? "p-padding_medium rounded-rounded_primary font-semibold bg-activeNav" : ""} hover:bg-activeNav p-padding_medium rounded-rounded_primary`}>Products</Link>
+                            <Link onClick={() => handleActiveNav('/products')} to={'/products'} className={` ${selected === '/products' ? "p-padding_medium rounded-rounded_primary font-semibold bg-activeNav" : ""} hover:bg-activeNav p-padding_medium rounded-rounded_primary`}>Products</Link>
                         </li>
                         <li className='max-lg:border-b border-gray-300 max-lg:py-padding_medium px-padding_medium'>
-                            <Link onClick={() => handleActiveNav('/categories')} className={` ${selected === '/categories' ? "p-padding_medium rounded-rounded_primary font-semibold bg-activeNav" : ""} hover:bg-activeNav p-padding_medium rounded-rounded_primary`}>Categories</Link>
+                            <Link onClick={() => handleActiveNav('/categories')} to={'/categories'} className={` ${selected === '/categories' ? "p-padding_medium rounded-rounded_primary font-semibold bg-activeNav" : ""} hover:bg-activeNav p-padding_medium rounded-rounded_primary`}>Categories</Link>
                         </li>
                         <li className='max-lg:border-b border-gray-300 max-lg:py-padding_medium px-padding_medium'>
                             <Link onClick={() => handleActiveNav('/checkout')} className={` ${selected === '/checkout' ? "p-padding_medium rounded-rounded_primary font-semibold bg-activeNav" : ""} hover:bg-activeNav p-padding_medium rounded-rounded_primary`}>Checkout</Link>
