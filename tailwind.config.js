@@ -11,7 +11,8 @@ export default {
         secondary: '#FAFAFA',
         activeNav: "#F8F8F8",
         footer_link: "#81859F",
-        error: "#ef4444"
+        error: "#ef4444",
+        discount: "#B92E2E"
       },
       margin: {
         m_small: '4px',
@@ -45,7 +46,7 @@ export default {
       },
       borderRadius: {
         rounded_primary: '8px',
-        rounded_secondary: '10px',
+        rounded_secondary: '16px',
         rounded_4px: '4px',
 
       },
