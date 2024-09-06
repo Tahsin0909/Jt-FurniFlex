@@ -6,7 +6,7 @@ import { RiTwitterXFill } from "react-icons/ri";
 import { CiLinkedin } from "react-icons/ci";
 const Footer = () => {
     return (
-        <footer className="md:pt-padding_lg lg:pb-padding_md lg:px-padding_xl  md:px-padding_medium p-padding_medium bg-black text-white">
+        <footer className="md:pt-padding_lg lg:pb-padding_lg lg:px-padding_xl  md:px-padding_medium p-padding_medium bg-black text-white">
             {/* Main footer container with grid layout */}
             <div className="grid lg:grid-cols-5 md:grid-cols-2 grid-cols-1 items-start lg:mb-m_xl md:mb-m_lg mb-m_primary lg:gap-0 md:gap-8 gap-6">
                 {/* Company logo and name */}
@@ -69,6 +69,7 @@ const Footer = () => {
                     <p className="text-lg font-semibold text-footer_link hover:underline">United States (English)</p> {/* Language option */}
                 </div>
             </div>
+            <p className="text-lg text-center font-semibold text-footer_link hover:underline mt-m_lg">EEVE © 2024. All rights reserved.</p>
         </footer>
     );
 };
