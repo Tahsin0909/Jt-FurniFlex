@@ -5,13 +5,13 @@ import toast from "react-hot-toast";
 
 const Order = () => {
     const { cartsData, cartLoading, cartRefetch } = useCart()
-
+    console.log(cartsData);
 
     // increase and decrease 
     const handleIncrease = (data, increase) => {
         const existingItems = JSON.parse(localStorage.getItem('productDraft')) || [];
         console.log(existingItems);
-        const isExist = existingItems.find(Olddata => Olddata.id === data.id)
+        const isExist = existingItems.find(OldData => OldData.id === data.id)
         console.log(isExist);
         const targetItem = existingItems.findIndex(obj => obj.id == data.id);
         console.log(targetItem);
@@ -30,7 +30,7 @@ const Order = () => {
 
     const handleDecrease = (data, decrease) => {
         const existingItems = JSON.parse(localStorage.getItem('productDraft')) || [];
-        const isExist = existingItems.find(Olddata => Olddata.id === data.id)
+        const isExist = existingItems.find(OldData => OldData.id === data.id)
         const targetItem = existingItems.findIndex(obj => obj.id == data.id);
         if (targetItem !== -1 && isExist.itemCount > 1) {
             existingItems.splice(targetItem, 1);
@@ -56,6 +56,13 @@ const Order = () => {
         cartRefetch()
         toast.success("Remove Item Successfully");
     };
+
+    // Calculate total price
+    const Price = cartsData.reduce((total, item) => {
+        return total + (item.finalPrice * item.itemCount);
+    }, 0);
+    const totalPrice = parseFloat(Price).toFixed(2)
+
     return (
         <div className="md:py-padding_lg py-padding_md lg:px-padding_xl px-padding_base">
             <div className="grid lg:grid-cols-8 md:grid-cols-5 grid-cols-1 lg:gap-20 gap-gap_primary">
@@ -86,7 +93,7 @@ const Order = () => {
                             :
                             (
                                 <div className="my-m_lg bg-activeNav rounded-rounded_secondary">
-                                    {
+                                    {cartsData.length === 0 ? <p className="p-padding_lg">Please add some Products to the cart</p> : (
                                         cartsData.map(data => (
                                             <div key={data.id} className=" px-padding_md pt-padding_md">
                                                 <div className="border-b pb-padding_md">
@@ -109,7 +116,7 @@ const Order = () => {
                                                     <p className="text-end font-bold">${data.finalPrice}</p>
                                                 </div>
                                             </div>
-                                        ))
+                                        )))
                                     }
 
                                 </div>
@@ -123,7 +130,7 @@ const Order = () => {
                         <div className="border-b px-padding_small pb-padding_md text-text_base font-semibold text-footer_link">
                             <div className="flex items-center justify-between">
                                 <span>Subtotal</span>
-                                <span>$1072.00</span>
+                                <span>${totalPrice}</span>
                             </div>
                             <div className="flex items-center justify-between">
                                 <span>Shipping</span>
@@ -131,12 +138,12 @@ const Order = () => {
                             </div>
                             <div className="flex items-center justify-between">
                                 <span>Estimated Tax</span>
-                                <span>$-</span>
+                                <span>$ 0</span>
                             </div>
                         </div>
                         <div className="flex items-center justify-between text-text_xl font-bold mt-m_secondary">
                             <span>Total</span>
-                            <span>$1071.00</span>
+                            <span>${totalPrice}</span>
                         </div>
                     </div>
                     <Link to={'/checkout'} className="mt-m_primary active:scale-95 transition-all ease-out text-start p-padding_medium bg-black text-white rounded-rounded_primary w-full flex items-center justify-center gap-gap_base text-text_base">
