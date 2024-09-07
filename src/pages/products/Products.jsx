@@ -2,12 +2,30 @@ import { useState } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { PiHandbagSimpleBold } from "react-icons/pi";
 import useProducts from "../../hooks/useProducts";
+import toast from "react-hot-toast";
+import useCart from "../../hooks/useCart";
 
 const Products = () => {
+    const { cartRefetch } = useCart()
     const [filter, setFilter] = useState("all");
 
     const { productsData, productLoading } = useProducts()
 
+    const handleCart = (data) => {
+        const existingItems = JSON.parse(localStorage.getItem('productDraft')) || [];
+        const isExist = existingItems.find(Olddata => Olddata.id === data.id)
+        if (isExist) {
+                toast.error('Product added Successfully in Cart')
+        }
+        else {
+            const newItem = data;
+            const updatedItems = [...existingItems, newItem];
+            localStorage.setItem('productDraft', JSON.stringify(updatedItems));
+            cartRefetch()
+            toast.success('Product Added Successfully in Cart')
+
+        }
+    }
 
     const filteredProducts = filter === "all" ? productsData : productsData.filter(product => product.category === filter);
 
@@ -128,7 +146,7 @@ const Products = () => {
                                                 </div>
                                                 <p className="text-footer_link text-[15px] w-[237px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus.</p>
                                             </div>
-                                            <button className="mt-m_primary active:scale-95 transition-all ease-out text-start p-padding_medium bg-black text-white rounded-rounded_primary w-full flex items-center justify-center gap-gap_base text-text_base">
+                                            <button onClick={() => handleCart(product)} className="mt-m_primary active:scale-95 transition-all ease-out text-start p-padding_medium bg-black text-white rounded-rounded_primary w-full flex items-center justify-center gap-gap_base text-text_base">
                                                 <PiHandbagSimpleBold size={20} />
                                                 <p className="font-semibold">Add to Cart</p>
                                             </button>

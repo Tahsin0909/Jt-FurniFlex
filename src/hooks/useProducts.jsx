@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 
 
-const useProducts = (userEmail) => {
+const useProducts = () => {
 
     const { data: productsData = [], loading: productLoading, refetch } = useQuery({
-        queryKey: ["budgetPlanningData", userEmail],
+        queryKey: ["products"],
         queryFn: async () => {
             const res = await fetch('/fake.json')
             const data = res.json()

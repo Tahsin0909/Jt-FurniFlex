@@ -78,7 +78,8 @@ const ContextApi = ({ children }) => {
         return () => Unsubscribe()
     }, [AuthUser, loading])
 
-
+    const cart = []
+    console.log(cart);
     const contextInfo = {
         AuthUser,
         loading,
@@ -86,7 +87,8 @@ const ContextApi = ({ children }) => {
         UpdateUser,
         SignInUser,
         GoogleSignUp,
-        LogOut
+        LogOut,
+        cart
     }
 
 

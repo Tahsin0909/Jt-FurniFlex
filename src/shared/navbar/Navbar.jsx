@@ -5,11 +5,12 @@ import { PiHandbagSimpleBold, PiSignOut } from "react-icons/pi";
 import { CiLogin } from "react-icons/ci";
 import { MdMenu } from "react-icons/md";
 import useContextApi from "../../hooks/useContextApi";
+import useCart from "../../hooks/useCart";
 
 const Navbar = () => {
-
-    const { AuthUser, LogOut } = useContextApi()
-console.log(AuthUser?.photoURL);
+    const { cartsData} = useCart()
+    const { AuthUser, LogOut} = useContextApi()
+    console.log(AuthUser?.photoURL);
     // State to track the selected path
     const [selected, setSelected] = useState('');
     const location = useLocation(); // To detect changes in the route
@@ -111,7 +112,7 @@ console.log(AuthUser?.photoURL);
                 <div className='flex items-center max-lg:ml-auto space-x-3'>
                     {/* Shopping bag with badge */}
                     <Link to={'/cart'} className='relative'>
-                        <span className="absolute text-center text-white w-w_base h-h_base -bottom-1 -right-1 text-text_small rounded-full bg-black">2</span>
+                        <span className="absolute text-center text-white w-w_base h-h_base -bottom-1 -right-1 text-text_small rounded-full bg-black">{cartsData?.length}</span>
                         <PiHandbagSimpleBold size={35} />
                     </Link>
 
@@ -133,7 +134,7 @@ console.log(AuthUser?.photoURL);
                             )
                     }
                     {/* User profile picture */}
-                    <img className="w-w_medium h-h_medium object-cover rounded-full" src={AuthUser?.photoURL ? AuthUser?.photoURL :"https://img.freepik.com/free-photo/pretty-smiling-joyfully-female-with-fair-hair-dressed-casually-looking-with-satisfaction_176420-15187.jpg?ga=GA1.1.961467854.1725388054&semt=ais_hybrid" }alt="profile" />
+                    <img className="w-w_medium h-h_medium object-cover rounded-full" src={AuthUser?.photoURL ? AuthUser?.photoURL : "https://img.freepik.com/free-photo/pretty-smiling-joyfully-female-with-fair-hair-dressed-casually-looking-with-satisfaction_176420-15187.jpg?ga=GA1.1.961467854.1725388054&semt=ais_hybrid"} alt="profile" />
 
                     {/* Menu toggle button for smaller screens */}
                     <button id="toggleOpen" onClick={handleClick} className='lg:hidden'>
