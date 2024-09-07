@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 import CompanyName from "../../shared/companyname/CompanyName";
 import SideImage from "../../assets/sideImage.png";
@@ -6,14 +7,44 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { FaApple, FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useContextApi from "../../hooks/useContextApi";
+import toast, { Toaster } from "react-hot-toast";
 const LogIn = () => {
 
+
+    const location = useLocation()
+    const navigate = useNavigate()
+    const { SignInUser, GoogleSignUp } = useContextApi()
     const { register, handleSubmit, formState: { errors } } = useForm();
 
 
-    // handle form submit 
-    const onSubmit = data => console.log(data);
+    // Form submit handler
+    const onSubmit = data => {
+        // console.log(data.email, data.password, data.firstName, data.lastName);
+        SignInUser(data.email, data.password)
+            .then(result => {
+                toast.success(`Authenticating as ${result.user.email}`)
+                location?.search ? navigate(`${location?.search?.slice(1, location.search.length)}`) : navigate('/')
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                toast.error(`Error!! Reason: ${errorMessage}`, { duration: 3000 });
+            });
+    }
+
+    const handleGoogle = () => {
+        GoogleSignUp()
+            .then(result => {
+                console.log(result.user)
+                toast.success(`Authenticating as ${result.user.email}`)
+                location?.search ? navigate(`${location?.search?.slice(1, location.search.length)}`) : navigate('/')
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                toast.error(`Error!! Reason: ${errorMessage}`, { duration: 3000 });
+            });
+    }
 
 
 
@@ -98,10 +129,10 @@ const LogIn = () => {
                     {/* social SignUp  */}
                     <div className="grid grid-cols-2 items-center gap-gap_base">
                         {/* google authentication  */}
-                        <div className="flex items-center justify-center gap-2 border p-button_padding rounded-rounded_primary hover:shadow-md">
+                        <button onClick={handleGoogle} className="flex items-center justify-center gap-2 border p-button_padding rounded-rounded_primary hover:shadow-md">
                             <FcGoogle size={25} />
                             <span className="md:text-base text-text_small">Sign in with Google</span>
-                        </div>
+                        </button>
                         {/* apple authentication  */}
                         <div className="flex items-center justify-center gap-2 border p-button_padding rounded-rounded_primary hover:shadow-md">
                             <FaApple size={25} />

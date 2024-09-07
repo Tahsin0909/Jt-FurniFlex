@@ -7,6 +7,7 @@ import { FaApple, FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useContextApi from "../../hooks/useContextApi";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
 
@@ -38,20 +39,14 @@ const SignUp = () => {
                 // console.log(result.user);
                 UpdateUser(Name)
                     .then(() => {
-                        const User = {
-                            name: result.user.displayName,
-                            email: result.user.email,
-                        }
-
 
                         try {
-                            console.log(User);
-
+                            toast.success(`Authenticating as ${result.user.email}`)
                         }
                         catch (error) {
                             const errorMessage = error.message;
                             console.log(errorMessage);
-                            // toast.success(`Error during sign up: ${error.message}`, { duration: 3000 });
+                            toast.error(`Error!! Reason: ${errorMessage}`, { duration: 3000 });
                         }
 
 
@@ -63,7 +58,7 @@ const SignUp = () => {
                     .catch((error) => {
                         const errorMessage = error.message;
                         console.log(errorMessage);
-                        // toast.error(`${errorMessage}`)
+                        toast.error(`Error!! Reason: ${errorMessage}`, { duration: 3000 });
                     });
 
             })
@@ -74,21 +69,16 @@ const SignUp = () => {
             });
     }
 
-const handleGoogle = () => {
+    const handleGoogle = () => {
         GoogleSignUp()
             .then(result => {
-                console.log(result.user)
-                const userInfo = {
-                    email: result?.user?.email,
-                    name: result?.user?.displayName
-                }
-                console.log(userInfo);
+                toast.success(`Authenticating as ${result.user.email}`)
                 location?.search ? navigate(`${location?.search?.slice(1, location.search.length)}`) : navigate('/')
             })
             .catch((error) => {
                 const errorMessage = error.message;
                 console.log(errorMessage);
-                // toast.success(`Error!! Reason: ${errorMessage}`, { duration: 3000 });
+                toast.error(`Error!! Reason: ${errorMessage}`, { duration: 3000 });
             });
     }
 
