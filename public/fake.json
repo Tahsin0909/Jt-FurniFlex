@@ -1,0 +1,57 @@
+[
+    { 
+      "id": 1, 
+      "category": "rockingChair", 
+      "name": "Classic Rocker", 
+      "price": 349, 
+      "discount": "25% OFF", 
+      "imageUrl": "https://i.ibb.co/xyz123/classic-rocker.png", 
+      "finalPrice": 261.75 
+    },
+    { 
+      "id": 2, 
+      "category": "rockingChair", 
+      "name": "Vintage Rocker", 
+      "price": 399, 
+      "discount": "20% OFF", 
+      "imageUrl": "https://i.ibb.co/xyz456/vintage-rocker.png", 
+      "finalPrice": 319.20 
+    },
+    { 
+      "id": 3, 
+      "category": "sideChair", 
+      "name": "Modern Side Chair", 
+      "price": 199, 
+      "discount": "15% OFF", 
+      "imageUrl": "https://i.ibb.co/xyz789/modern-side-chair.png", 
+      "finalPrice": 169.15 
+    },
+    { 
+      "id": 4, 
+      "category": "loungeChair", 
+      "name": "Luxury Lounge Chair", 
+      "price": 499, 
+      "discount": "35% OFF", 
+      "imageUrl": "https://i.ibb.co/xyz012/luxury-lounge-chair.png", 
+      "finalPrice": 324.35 
+    },
+    { 
+      "id": 5, 
+      "category": "sideChair", 
+      "name": "Contemporary Side Chair", 
+      "price": 249, 
+      "discount": "10% OFF", 
+      "imageUrl": "https://i.ibb.co/xyz345/contemporary-side-chair.png", 
+      "finalPrice": 224.10 
+    },
+    { 
+      "id": 6, 
+      "category": "rockingChair", 
+      "name": "Minimalist Rocker", 
+      "price": 299, 
+      "discount": "30% OFF", 
+      "imageUrl": "https://i.ibb.co/xyz678/minimalist-rocker.png", 
+      "finalPrice": 209.30 
+    }
+  ]
+  

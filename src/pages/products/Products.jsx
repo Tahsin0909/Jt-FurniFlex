@@ -1,16 +1,13 @@
 import { useState } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { PiHandbagSimpleBold } from "react-icons/pi";
+import useProducts from "../../hooks/useProducts";
 
 const Products = () => {
     const [filter, setFilter] = useState("all");
 
-    const productsData = [
-        { id: 1, category: "rockingChair", name: "Chair Wood", price: 299, discount: "30% OFF", imageUrl: "https://i.ibb.co.com/M8bdFTV/image-removebg-preview-24.png" },
-        { id: 2, category: "rockingChair", name: "Chair Wood", price: 299, discount: "30% OFF", imageUrl: "https://i.ibb.co.com/M8bdFTV/image-removebg-preview-24.png" },
-        { id: 3, category: "sideChair", name: "Chair Wood", price: 299, discount: "30% OFF", imageUrl: "https://i.ibb.co.com/M8bdFTV/image-removebg-preview-24.png" },
-        { id: 4, category: "loungeChair", name: "Chair Wood", price: 299, discount: "30% OFF", imageUrl: "https://i.ibb.co.com/M8bdFTV/image-removebg-preview-24.png" },
-    ];
+    const { productsData, productLoading } = useProducts()
+
 
     const filteredProducts = filter === "all" ? productsData : productsData.filter(product => product.category === filter);
 
@@ -45,92 +42,103 @@ const Products = () => {
 
                 </div>
                 <div className="lg:col-span-5 md:col-span-3 mx-auto lg:mx-m_xl">
-                    <div className="grid lg:grid-cols-3 grid-cols-1 items-center justify-evenly lg:gap-y-gap_primary md:gap-gap_primary gap-gap_primary">
-                        {filteredProducts.map((product) => (
-                            <div key={product.id} className="product border w-[277px] h-[484px] p-padding_medium rounded-rounded_primary shadow-xl hover:shadow-2xl">
-                                <div className="w-[245px] h-[236px] bg-activeNav rounded-rounded_primary">
-                                    <img className="object-cover w-[205px] h-[205px] mx-auto" src={product.imageUrl} alt={product.name} />
-                                </div>
-                                <div className="space-y-3 mt-m_base">
-                                    <p className="text-text_base font-bold">{product.name}</p>
-                                    <div className="flex items-center text-text_base font-bold gap-x-4">
-                                        <p>${product.price}.00</p>
-                                        <p className="line-through text-footer_link">$300.00</p>
-                                        <p className="text-discount">{product.discount}</p>
+                    {
+                        productLoading ? (
+                            <div className="grid lg:grid-cols-3 grid-cols-1 items-center justify-evenly lg:gap-y-gap_primary md:gap-gap_primary gap-gap_primary">
+                                <div className="product-skeleton border w-[277px] h-[484px] p-padding_medium rounded-rounded_primary shadow-xl animate-pulse">
+                                    <div className="w-[245px] h-[236px] bg-gray-300 rounded-rounded_primary">
+                                        <div className="bg-gray-300 w-[205px] h-[205px] mx-auto"></div>
                                     </div>
-                                    <p className="text-footer_link text-[15px] w-[237px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus.</p>
+                                    <div className="space-y-3 mt-4">
+                                        <div className="bg-gray-200 h-6 w-3/4"></div>
+                                        <div className="flex items-center gap-x-4">
+                                            <div className="bg-gray-200 h-6 w-1/4"></div>
+                                            <div className="bg-gray-200 h-6 w-1/4"></div>
+                                            <div className="bg-gray-200 h-6 w-1/4"></div>
+                                        </div>
+                                        <div className="bg-gray-200 h-4 w-[237px]"></div>
+                                        <div className="bg-gray-200 h-4 w-[237px]"></div>
+                                    </div>
+                                    <div className="bg-gray-300 h-12 mt-m_primary w-full rounded-rounded_primary"></div>
                                 </div>
-                                <button className="mt-m_primary active:scale-95 transition-all ease-out text-start p-padding_medium bg-black text-white rounded-rounded_primary w-full flex items-center justify-center gap-gap_base text-text_base">
-                                    <PiHandbagSimpleBold size={20} />
-                                    <p className="font-semibold">Add to Cart</p>
-                                </button>
-                            </div>
-                        ))}
-                        <div className="product-skeleton border w-[277px] h-[484px] p-padding_medium rounded-rounded_primary shadow-xl animate-pulse">
-                            <div className="w-[245px] h-[236px] bg-gray-300 rounded-rounded_primary">
-                                <div className="bg-gray-300 w-[205px] h-[205px] mx-auto"></div>
-                            </div>
-                            <div className="space-y-3 mt-4">
-                                <div className="bg-gray-200 h-6 w-3/4"></div>
-                                <div className="flex items-center gap-x-4">
-                                    <div className="bg-gray-200 h-6 w-1/4"></div>
-                                    <div className="bg-gray-200 h-6 w-1/4"></div>
-                                    <div className="bg-gray-200 h-6 w-1/4"></div>
+                                <div className="product-skeleton border w-[277px] h-[484px] p-padding_medium rounded-rounded_primary shadow-xl animate-pulse">
+                                    <div className="w-[245px] h-[236px] bg-gray-300 rounded-rounded_primary">
+                                        <div className="bg-gray-300 w-[205px] h-[205px] mx-auto"></div>
+                                    </div>
+                                    <div className="space-y-3 mt-4">
+                                        <div className="bg-gray-200 h-6 w-3/4"></div>
+                                        <div className="flex items-center gap-x-4">
+                                            <div className="bg-gray-200 h-6 w-1/4"></div>
+                                            <div className="bg-gray-200 h-6 w-1/4"></div>
+                                            <div className="bg-gray-200 h-6 w-1/4"></div>
+                                        </div>
+                                        <div className="bg-gray-200 h-4 w-[237px]"></div>
+                                        <div className="bg-gray-200 h-4 w-[237px]"></div>
+                                    </div>
+                                    <div className="bg-gray-300 h-12 mt-m_primary w-full rounded-rounded_primary"></div>
                                 </div>
-                                <div className="bg-gray-200 h-4 w-[237px]"></div>
-                                <div className="bg-gray-200 h-4 w-[237px]"></div>
-                            </div>
-                            <div className="bg-gray-300 h-12 mt-m_primary w-full rounded-rounded_primary"></div>
-                        </div>
-                        <div className="product-skeleton border w-[277px] h-[484px] p-padding_medium rounded-rounded_primary shadow-xl animate-pulse">
-                            <div className="w-[245px] h-[236px] bg-gray-300 rounded-rounded_primary">
-                                <div className="bg-gray-300 w-[205px] h-[205px] mx-auto"></div>
-                            </div>
-                            <div className="space-y-3 mt-4">
-                                <div className="bg-gray-200 h-6 w-3/4"></div>
-                                <div className="flex items-center gap-x-4">
-                                    <div className="bg-gray-200 h-6 w-1/4"></div>
-                                    <div className="bg-gray-200 h-6 w-1/4"></div>
-                                    <div className="bg-gray-200 h-6 w-1/4"></div>
+                                <div className="product-skeleton border w-[277px] h-[484px] p-padding_medium rounded-rounded_primary shadow-xl animate-pulse">
+                                    <div className="w-[245px] h-[236px] bg-gray-300 rounded-rounded_primary">
+                                        <div className="bg-gray-300 w-[205px] h-[205px] mx-auto"></div>
+                                    </div>
+                                    <div className="space-y-3 mt-4">
+                                        <div className="bg-gray-200 h-6 w-3/4"></div>
+                                        <div className="flex items-center gap-x-4">
+                                            <div className="bg-gray-200 h-6 w-1/4"></div>
+                                            <div className="bg-gray-200 h-6 w-1/4"></div>
+                                            <div className="bg-gray-200 h-6 w-1/4"></div>
+                                        </div>
+                                        <div className="bg-gray-200 h-4 w-[237px]"></div>
+                                        <div className="bg-gray-200 h-4 w-[237px]"></div>
+                                    </div>
+                                    <div className="bg-gray-300 h-12 mt-m_primary w-full rounded-rounded_primary"></div>
                                 </div>
-                                <div className="bg-gray-200 h-4 w-[237px]"></div>
-                                <div className="bg-gray-200 h-4 w-[237px]"></div>
-                            </div>
-                            <div className="bg-gray-300 h-12 mt-m_primary w-full rounded-rounded_primary"></div>
-                        </div>
-                        <div className="product-skeleton border w-[277px] h-[484px] p-padding_medium rounded-rounded_primary shadow-xl animate-pulse">
-                            <div className="w-[245px] h-[236px] bg-gray-300 rounded-rounded_primary">
-                                <div className="bg-gray-300 w-[205px] h-[205px] mx-auto"></div>
-                            </div>
-                            <div className="space-y-3 mt-4">
-                                <div className="bg-gray-200 h-6 w-3/4"></div>
-                                <div className="flex items-center gap-x-4">
-                                    <div className="bg-gray-200 h-6 w-1/4"></div>
-                                    <div className="bg-gray-200 h-6 w-1/4"></div>
-                                    <div className="bg-gray-200 h-6 w-1/4"></div>
+                                <div className="product-skeleton border w-[277px] h-[484px] p-padding_medium rounded-rounded_primary shadow-xl animate-pulse">
+                                    <div className="w-[245px] h-[236px] bg-gray-300 rounded-rounded_primary">
+                                        <div className="bg-gray-300 w-[205px] h-[205px] mx-auto"></div>
+                                    </div>
+                                    <div className="space-y-3 mt-4">
+                                        <div className="bg-gray-200 h-6 w-3/4"></div>
+                                        <div className="flex items-center gap-x-4">
+                                            <div className="bg-gray-200 h-6 w-1/4"></div>
+                                            <div className="bg-gray-200 h-6 w-1/4"></div>
+                                            <div className="bg-gray-200 h-6 w-1/4"></div>
+                                        </div>
+                                        <div className="bg-gray-200 h-4 w-[237px]"></div>
+                                        <div className="bg-gray-200 h-4 w-[237px]"></div>
+                                    </div>
+                                    <div className="bg-gray-300 h-12 mt-m_primary w-full rounded-rounded_primary"></div>
                                 </div>
-                                <div className="bg-gray-200 h-4 w-[237px]"></div>
-                                <div className="bg-gray-200 h-4 w-[237px]"></div>
                             </div>
-                            <div className="bg-gray-300 h-12 mt-m_primary w-full rounded-rounded_primary"></div>
-                        </div>
-                        <div className="product-skeleton border w-[277px] h-[484px] p-padding_medium rounded-rounded_primary shadow-xl animate-pulse">
-                            <div className="w-[245px] h-[236px] bg-gray-300 rounded-rounded_primary">
-                                <div className="bg-gray-300 w-[205px] h-[205px] mx-auto"></div>
-                            </div>
-                            <div className="space-y-3 mt-4">
-                                <div className="bg-gray-200 h-6 w-3/4"></div>
-                                <div className="flex items-center gap-x-4">
-                                    <div className="bg-gray-200 h-6 w-1/4"></div>
-                                    <div className="bg-gray-200 h-6 w-1/4"></div>
-                                    <div className="bg-gray-200 h-6 w-1/4"></div>
+                        )
+                            :
+                            (
+                                <div className="grid lg:grid-cols-3 grid-cols-1 items-center justify-evenly lg:gap-y-gap_primary md:gap-gap_primary gap-gap_primary">
+                                    {filteredProducts.map((product) => (
+                                        <div key={product.id} className="product border w-[277px] h-[484px] p-padding_medium rounded-rounded_primary shadow-xl hover:shadow-2xl">
+                                            <div className="w-[245px] h-[236px] bg-activeNav rounded-rounded_primary">
+                                                <img className="object-cover w-[205px] h-[205px] mx-auto" src={product.imageUrl} alt={product.name} />
+                                            </div>
+                                            <div className="space-y-3 mt-m_base">
+                                                <p className="text-text_base font-bold">{product.name}</p>
+                                                <div className="flex items-center text-text_base font-bold gap-x-4">
+                                                    <p className="line-through text-footer_link">${product.finalPrice}</p>
+                                                    <p>${product.price}</p>
+                                                    <p className="text-discount">{product.discount}</p>
+                                                </div>
+                                                <p className="text-footer_link text-[15px] w-[237px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus.</p>
+                                            </div>
+                                            <button className="mt-m_primary active:scale-95 transition-all ease-out text-start p-padding_medium bg-black text-white rounded-rounded_primary w-full flex items-center justify-center gap-gap_base text-text_base">
+                                                <PiHandbagSimpleBold size={20} />
+                                                <p className="font-semibold">Add to Cart</p>
+                                            </button>
+                                        </div>
+                                    ))}
+
                                 </div>
-                                <div className="bg-gray-200 h-4 w-[237px]"></div>
-                                <div className="bg-gray-200 h-4 w-[237px]"></div>
-                            </div>
-                            <div className="bg-gray-300 h-12 mt-m_primary w-full rounded-rounded_primary"></div>
-                        </div>
-                    </div>
+                            )
+                    }
+
                 </div>
             </div>
 
