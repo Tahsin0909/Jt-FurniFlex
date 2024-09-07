@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import logo from '../../assets/Logo (1).png';
 import { Link, useLocation } from "react-router-dom";
-import { PiHandbagSimpleBold } from "react-icons/pi";
+import { PiHandbagSimpleBold, PiSignOut } from "react-icons/pi";
 import { CiLogin } from "react-icons/ci";
 import { MdMenu } from "react-icons/md";
+import useContextApi from "../../hooks/useContextApi";
 
 const Navbar = () => {
+
+    const { AuthUser, LogOut } = useContextApi()
+console.log(AuthUser?.photoURL);
     // State to track the selected path
     const [selected, setSelected] = useState('');
     const location = useLocation(); // To detect changes in the route
@@ -111,14 +115,25 @@ const Navbar = () => {
                         <PiHandbagSimpleBold size={35} />
                     </Link>
 
-                    {/* Sign In button */}
-                    <Link to={'/SignIn'} className='group flex items-center gap-1 p-padding_small rounded-rounded_primary bg-primary bg-opacity-90 group-hover:opacity-100 text-white active:scale-95 transition-all ease-linear'>
-                        <CiLogin size={20} className="opacity-90 group-hover:opacity-100" />
-                        <span className="opacity-90 group-hover:opacity-100">SignIn</span>
-                    </Link>
-
+                    {
+                        AuthUser ? (
+                            // sign out button 
+                            <Link onClick={LogOut} className='group flex items-center gap-1 p-padding_small rounded-rounded_primary bg-primary bg-opacity-90 group-hover:opacity-100 text-white active:scale-95 transition-all ease-linear'>
+                                <PiSignOut size={20} className="opacity-90 group-hover:opacity-100" />
+                                <span className="opacity-90 group-hover:opacity-100">Sign Out</span>
+                            </Link>
+                        )
+                            :
+                            (
+                                // sign in button 
+                                <Link to={'/SignIn'} className='group flex items-center gap-1 p-padding_small rounded-rounded_primary bg-primary bg-opacity-90 group-hover:opacity-100 text-white active:scale-95 transition-all ease-linear'>
+                                    <CiLogin size={20} className="opacity-90 group-hover:opacity-100" />
+                                    <span className="opacity-90 group-hover:opacity-100">SignIn</span>
+                                </Link>
+                            )
+                    }
                     {/* User profile picture */}
-                    <img className="w-w_medium h-h_medium object-cover rounded-full" src="https://img.freepik.com/free-photo/pretty-smiling-joyfully-female-with-fair-hair-dressed-casually-looking-with-satisfaction_176420-15187.jpg?ga=GA1.1.961467854.1725388054&semt=ais_hybrid" alt="profile" />
+                    <img className="w-w_medium h-h_medium object-cover rounded-full" src={AuthUser?.photoURL ? AuthUser?.photoURL :"https://img.freepik.com/free-photo/pretty-smiling-joyfully-female-with-fair-hair-dressed-casually-looking-with-satisfaction_176420-15187.jpg?ga=GA1.1.961467854.1725388054&semt=ais_hybrid" }alt="profile" />
 
                     {/* Menu toggle button for smaller screens */}
                     <button id="toggleOpen" onClick={handleClick} className='lg:hidden'>
@@ -126,7 +141,7 @@ const Navbar = () => {
                     </button>
                 </div>
             </div>
-        </header>
+        </header >
     );
 };
 

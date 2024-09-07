@@ -5,9 +5,17 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { FaApple, FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useContextApi from "../../hooks/useContextApi";
 
 const SignUp = () => {
+
+    const { GoogleSignUp, createUser, UpdateUser } = useContextApi()
+
+    const location = useLocation()
+    const navigate = useNavigate()
+
+
 
     // Initialize react-hook-form with error handling methods
     const { register, handleSubmit, formState: { errors }, clearErrors, setError } = useForm();
@@ -22,7 +30,79 @@ const SignUp = () => {
     };
 
     // Form submit handler
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        console.log(data.email, data.password, data.firstName, data.lastName);
+        const Name = `${data.firstName} ${data.lastName}`;
+        createUser(data.email, data.password)
+            .then(result => {
+                // console.log(result.user);
+                UpdateUser(Name)
+                    .then(() => {
+                        const User = {
+                            name: result.user.displayName,
+                            email: result.user.email,
+                        }
+
+
+                        try {
+                            console.log(User);
+
+                        }
+                        catch (error) {
+                            const errorMessage = error.message;
+                            console.log(errorMessage);
+                            // toast.success(`Error during sign up: ${error.message}`, { duration: 3000 });
+                        }
+
+
+                        // console.log(User)
+                        // toast.success(`Authenticating as ${result.user.email}`)
+                        location?.search ? navigate(`${location?.search?.slice(1, location.search.length)}`) : navigate('/')
+
+                    })
+                    .catch((error) => {
+                        const errorMessage = error.message;
+                        console.log(errorMessage);
+                        // toast.error(`${errorMessage}`)
+                    });
+
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                console.log(errorMessage);
+                // toast.error(`${errorMessage}`)
+            });
+    }
+
+const handleGoogle = () => {
+        GoogleSignUp()
+            .then(result => {
+                console.log(result.user)
+                const userInfo = {
+                    email: result?.user?.email,
+                    name: result?.user?.displayName
+                }
+                console.log(userInfo);
+                location?.search ? navigate(`${location?.search?.slice(1, location.search.length)}`) : navigate('/')
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                console.log(errorMessage);
+                // toast.success(`Error!! Reason: ${errorMessage}`, { duration: 3000 });
+            });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     // State to toggle password visibility
     const [showPassword, setShowPassword] = useState(false);
@@ -149,10 +229,10 @@ const SignUp = () => {
                     {/* Social authentication buttons */}
                     <div className="grid grid-cols-2 items-center gap-gap_base">
                         {/* Google sign-in button */}
-                        <div className="flex items-center justify-center gap-2 border p-button_padding rounded-rounded_primary hover:shadow-md">
+                        <button onClick={handleGoogle} className="flex items-center justify-center gap-2 border p-button_padding rounded-rounded_primary hover:shadow-md">
                             <FcGoogle size={25} />
                             <span className="md:text-base text-text_small">Sign in with Google</span>
-                        </div>
+                        </button>
                         {/* Apple sign-in button */}
                         <div className="flex items-center justify-center gap-2 border p-button_padding rounded-rounded_primary hover:shadow-md">
                             <FaApple size={25} />

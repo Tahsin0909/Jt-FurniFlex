@@ -4,7 +4,7 @@
 
 import { createContext, useEffect, useState } from "react";
 
-import { GoogleAuthProvider, FacebookAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "@firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "@firebase/auth";
 import auth from "../../SDK";
 
 
@@ -28,10 +28,10 @@ const ContextApi = ({ children }) => {
     }
 
     //Update User
-    const UpdateUser = (name, photo_Url) => {
+    const UpdateUser = (name) => {
         // setLoading(true)
         return updateProfile(auth.currentUser, {
-            displayName: name, photoURL: photo_Url
+            displayName: name
         })
     }
 
