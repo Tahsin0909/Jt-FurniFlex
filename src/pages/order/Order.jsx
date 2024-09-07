@@ -1,4 +1,5 @@
 import { RxCross1 } from "react-icons/rx";
+import { Link } from "react-router-dom";
 
 const Order = () => {
 
@@ -51,9 +52,9 @@ const Order = () => {
 
     }
     return (
-        <div className="md:py-padding_lg py-padding_md lg:px-padding_xl">
-            <div className="grid grid-cols-8 gap-20">
-                <div className="col-span-5">
+        <div className="md:py-padding_lg py-padding_md lg:px-padding_xl px-padding_base">
+            <div className="grid lg:grid-cols-8 md:grid-cols-5 grid-cols-1 lg:gap-20 gap-gap_primary">
+                <div className="lg:col-span-5 md:col-span-3">
                     <p className="text-text_xl font-semibold">An overview of your order</p>
                     <div className="my-m_lg bg-activeNav rounded-rounded_secondary">
                         <div className=" px-padding_md pt-padding_md">
@@ -121,7 +122,7 @@ const Order = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-span-3">
+                <div className="lg:col-span-3 md:col-span-2">
                     <p className="text-text_xl font-semibold">Order Details</p>
                     <div className="my-m_lg bg-activeNav rounded-rounded_secondary p-padding_md">
                         <div className="border-b px-padding_small pb-padding_md text-text_base font-semibold text-footer_link">
@@ -143,9 +144,9 @@ const Order = () => {
                             <span>$1071.00</span>
                         </div>
                     </div>
-                    <button className="mt-m_primary active:scale-95 transition-all ease-out text-start p-padding_medium bg-black text-white rounded-rounded_primary w-full flex items-center justify-center gap-gap_base text-text_base">
+                    <Link to={'/checkout'} className="mt-m_primary active:scale-95 transition-all ease-out text-start p-padding_medium bg-black text-white rounded-rounded_primary w-full flex items-center justify-center gap-gap_base text-text_base">
                         <p className="font-semibold">Go to Checkout</p>
-                    </button>
+                    </Link>
                 </div>
             </div>
 
