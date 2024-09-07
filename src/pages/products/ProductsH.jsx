@@ -5,7 +5,7 @@ import useProducts from "../../hooks/useProducts"; // Custom hook to fetch produ
 import ProductsSkeleton from "../../components/productsCardSkeleton/ProductsSkeleton"; // Component to show loading state
 import ProductsCard from "../../components/productsCard/ProductsCard"; // Component to display product card
 
-const Products = () => {
+const ProductsH = () => {
 
     // State to manage the currently selected filter category
     const [filter, setFilter] = useState("all");
@@ -92,4 +92,4 @@ const Products = () => {
     );
 };
 
-export default Products;
+export default ProductsH;
