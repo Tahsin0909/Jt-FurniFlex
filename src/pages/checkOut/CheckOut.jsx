@@ -4,13 +4,17 @@ import { BsPerson } from "react-icons/bs";
 import { CiLocationOn } from "react-icons/ci";
 import { FaPhoneAlt } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
+import useCart from "../../hooks/useCart";
 
 const CheckOut = () => {
+
+    const { cartsData} = useCart()
+
     // State to store user inputs
     const [name, setName] = useState(null);
     const [address, setAddress] = useState(null);
     const [number, setNumber] = useState(null);
-    
+
     // React Hook Form for form validation
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -26,6 +30,12 @@ const CheckOut = () => {
         }
     };
 
+    // Calculate total price
+    const Price = cartsData.reduce((total, item) => {
+        return total + (item.finalPrice * item.itemCount);
+    }, 0);
+    const totalPrice = parseFloat(Price).toFixed(2)
+
     return (
         <div className="md:py-padding_lg py-padding_md lg:px-padding_xl px-padding_base">
             {/* Title */}
@@ -40,7 +50,7 @@ const CheckOut = () => {
                         <div className="lg:col-span-2">
                             <div className="border-footer_link border"></div>
                             <h3 className='pt-padding_medium mb-m_primary font-bold'>BILLING & SHIPPING</h3>
-                            
+
                             {/* Form Fields */}
                             <div className='space-y-5 pt-5'>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 gap-y-4">
@@ -81,7 +91,7 @@ const CheckOut = () => {
                                         {errors.address && <span className="text-error text-xs mt-m_small">Address is required</span>}
                                     </div>
                                 </div>
-                                
+
                                 {/* Additional Information */}
                                 <div>
                                     <h4 className='pt-8 mb-4 text-[18px] font-bold'>ADDITIONAL INFORMATION</h4>
@@ -108,15 +118,23 @@ const CheckOut = () => {
                                     <p className='text-text_lg font-bold p-[7px]'>SUBTOTAL</p>
                                 </div>
                                 {/* Example Product */}
-                                <div className="flex items-center justify-between border-b border-gray-300">
-                                    <p className='text-sm py-[15px]'>Rocking Chair × 1</p>
-                                    <p className='text-text_lg font-bold p-[7px]'>$1900</p>
-                                </div>
+                                {
+                                    cartsData.length === 0 ? <p className="p-padding_base">Add Product to Checkout</p> : (
+
+                                        cartsData.map(data => <div key={data.id} className="flex items-center justify-between border-b border-gray-300">
+                                            <p className='text-sm py-[15px]'>{data.name} × {data.itemCount}</p>
+                                            <p className='text-text_lg font-bold p-[7px]'>${data.finalPrice * data.itemCount}</p>
+                                        </div>)
+
+                                    )
+                                }
+
+
                             </div>
                             {/* Total Price */}
                             <div className="flex items-center justify-between border-b border-gray-300">
                                 <p className='text-[13.6px] py-[6.8px]'>Total</p>
-                                <p className='text-text_lg font-bold p-[7px]'>2900৳</p>
+                                <p className='text-text_lg font-bold p-[7px]'>${totalPrice}</p>
                             </div>
 
                             {/* Payment Method */}
@@ -124,7 +142,7 @@ const CheckOut = () => {
                                 <p className='text-text_lg font-bold py-[7px]'>Cash on delivery</p>
                                 <p className='text-[14px] mb-[7.4px]'>Pay with cash upon delivery.</p>
                             </div>
-                            
+
                             {/* Place Order Button */}
                             <button className="mt-m_primary active:scale-95 transition-all ease-out text-start p-padding_medium bg-black text-white rounded-rounded_primary w-full flex items-center justify-center gap-gap_base text-text_base">
                                 <p className="font-semibold">Place Your Order</p>
@@ -147,10 +165,15 @@ const CheckOut = () => {
                         <div className="my-8 text-center">
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-14 shrink-0 fill-green-500 inline" viewBox="0 0 512 512">
                                 {/* Success Icon */}
-                                <path d="..." />
+                                <path
+                                    d="M383.841 171.838c-7.881-8.31-21.02-8.676-29.343-.775L221.987 296.732l-63.204-64.893c-8.005-8.213-21.13-8.393-29.35-.387-8.213 7.998-8.386 21.137-.388 29.35l77.492 79.561a20.687 20.687 0 0 0 14.869 6.275 20.744 20.744 0 0 0 14.288-5.694l147.373-139.762c8.316-7.888 8.668-21.027.774-29.344z"
+                                    data-original="#000000" />
+                                <path
+                                    d="M256 0C114.84 0 0 114.84 0 256s114.84 256 256 256 256-114.84 256-256S397.16 0 256 0zm0 470.487c-118.265 0-214.487-96.214-214.487-214.487 0-118.265 96.221-214.487 214.487-214.487 118.272 0 214.487 96.221 214.487 214.487 0 118.272-96.215 214.487-214.487 214.487z"
+                                    data-original="#000000" />
                             </svg>
                             <h4 className="text-xl text-gray-800 font-semibold mt-4">Order Placed Successfully!</h4>
-                            
+
                             {/* Displaying User Info */}
                             <div className="grid grid-cols-3 gap-4 mt-6">
                                 {/* Name and Phone Number */}
