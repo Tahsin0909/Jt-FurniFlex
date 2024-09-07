@@ -99,7 +99,7 @@ const Navbar = () => {
                             <Link onClick={() => handleActiveNav('/cart')} to={'/cart'} className={` ${selected === '/cart' ? "p-padding_medium rounded-rounded_primary font-semibold bg-activeNav" : ""} hover:bg-activeNav p-padding_medium rounded-rounded_primary`}>Cart</Link>
                         </li>
                         <li className='max-lg:border-b border-gray-300 max-lg:py-padding_medium px-padding_medium'>
-                            <Link onClick={() => handleActiveNav('/checkout')} className={` ${selected === '/checkout' ? "p-padding_medium rounded-rounded_primary font-semibold bg-activeNav" : ""} hover:bg-activeNav p-padding_medium rounded-rounded_primary`}>Checkout</Link>
+                            <Link onClick={() => handleActiveNav('/checkout')} to={'/checkout'} className={` ${selected === '/checkout' ? "p-padding_medium rounded-rounded_primary font-semibold bg-activeNav" : ""} hover:bg-activeNav p-padding_medium rounded-rounded_primary`}>Checkout</Link>
                         </li>
                     </ul>
                 </div>

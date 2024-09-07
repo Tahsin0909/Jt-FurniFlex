@@ -5,6 +5,7 @@ import SignUp from "../pages/signup/SignUp";
 import ErrorPage from "../pages/errorpage/ErrorPage";
 import Products from "../pages/products/products";
 import Order from "../pages/order/Order";
+import CheckOut from "../pages/checkOut/CheckOut";
 
 export const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
             {
                 path: '/cart',
                 element: <Order/>
+            },
+            {
+                path: '/checkout',
+                element: <CheckOut/>
             }
 
         ]
