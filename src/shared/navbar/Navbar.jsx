@@ -10,7 +10,6 @@ import useCart from "../../hooks/useCart";
 const Navbar = () => {
     const { cartsData} = useCart()
     const { AuthUser, LogOut} = useContextApi()
-    console.log(AuthUser?.photoURL);
     // State to track the selected path
     const [selected, setSelected] = useState('');
     const location = useLocation(); // To detect changes in the route
