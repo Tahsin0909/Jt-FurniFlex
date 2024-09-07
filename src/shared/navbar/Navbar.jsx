@@ -64,7 +64,6 @@ const Navbar = () => {
     const handleActiveNav = (path) => {
         setSelected(path); // Set the active state for the clicked navigation item
     };
-
     return (
         <header className='flex border-b py-padding_md lg:px-padding_xl sm:px-padding_small p-padding_medium bg-white tracking-wide relative'>
             <div className='flex flex-wrap items-center justify-between gap-gap_primary w-full'>
