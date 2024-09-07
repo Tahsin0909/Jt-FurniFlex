@@ -96,6 +96,9 @@ const Navbar = () => {
                             <Link onClick={() => handleActiveNav('/categories')} to={'/categories'} className={` ${selected === '/categories' ? "p-padding_medium rounded-rounded_primary font-semibold bg-activeNav" : ""} hover:bg-activeNav p-padding_medium rounded-rounded_primary`}>Categories</Link>
                         </li>
                         <li className='max-lg:border-b border-gray-300 max-lg:py-padding_medium px-padding_medium'>
+                            <Link onClick={() => handleActiveNav('/cart')} to={'/cart'} className={` ${selected === '/cart' ? "p-padding_medium rounded-rounded_primary font-semibold bg-activeNav" : ""} hover:bg-activeNav p-padding_medium rounded-rounded_primary`}>Cart</Link>
+                        </li>
+                        <li className='max-lg:border-b border-gray-300 max-lg:py-padding_medium px-padding_medium'>
                             <Link onClick={() => handleActiveNav('/checkout')} className={` ${selected === '/checkout' ? "p-padding_medium rounded-rounded_primary font-semibold bg-activeNav" : ""} hover:bg-activeNav p-padding_medium rounded-rounded_primary`}>Checkout</Link>
                         </li>
                     </ul>
@@ -104,10 +107,10 @@ const Navbar = () => {
                 {/* Right side of the navbar */}
                 <div className='flex items-center max-lg:ml-auto space-x-3'>
                     {/* Shopping bag with badge */}
-                    <button className='relative'>
-                        <span className="absolute text-white w-w_base h-h_base -bottom-1 -right-1 text-text_small rounded-full bg-black">2</span>
+                    <Link to={'/cart'} className='relative'>
+                        <span className="absolute text-center text-white w-w_base h-h_base -bottom-1 -right-1 text-text_small rounded-full bg-black">2</span>
                         <PiHandbagSimpleBold size={35} />
-                    </button>
+                    </Link>
 
                     {/* Sign In button */}
                     <Link to={'/SignIn'} className='group flex items-center gap-1 p-padding_small rounded-rounded_primary bg-primary bg-opacity-90 group-hover:opacity-100 text-white active:scale-95 transition-all ease-linear'>

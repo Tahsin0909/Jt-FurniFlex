@@ -32,7 +32,8 @@ export default {
         text_base: '18px',
         text_primary: '30px',
         text_secondary: '36px',
-        text_lg: '16px'
+        text_lg: '16px',
+        text_xl: '20px'
       },
       padding: {
         input_padding: "8px",
