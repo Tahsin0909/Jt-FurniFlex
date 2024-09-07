@@ -11,12 +11,10 @@ import toast from "react-hot-toast";
 
 const SignUp = () => {
 
-    const { GoogleSignUp, createUser, UpdateUser } = useContextApi()
+    const { GoogleSignUp, createUser, UpdateUser } = useContextApi();  // Context API hooks for Google sign-up, user creation, and user profile update
 
-    const location = useLocation()
-    const navigate = useNavigate()
-
-
+    const location = useLocation();  // Retrieve the current location to navigate after signup
+    const navigate = useNavigate();  // For navigation after form submission
 
     // Initialize react-hook-form with error handling methods
     const { register, handleSubmit, formState: { errors }, clearErrors, setError } = useForm();
@@ -32,74 +30,53 @@ const SignUp = () => {
 
     // Form submit handler
     const onSubmit = data => {
-        console.log(data.email, data.password, data.firstName, data.lastName);
-        const Name = `${data.firstName} ${data.lastName}`;
-        createUser(data.email, data.password)
+        console.log(data.email, data.password, data.firstName, data.lastName);  // Log form data for testing
+        const Name = `${data.firstName} ${data.lastName}`;  // Concatenate first and last name
+        createUser(data.email, data.password)  // Create user with email and password
             .then(result => {
-                // console.log(result.user);
-                UpdateUser(Name)
+                UpdateUser(Name)  // Update user profile with name
                     .then(() => {
-
                         try {
-                            toast.success(`Authenticating as ${result.user.email}`)
+                            toast.success(`Authenticating as ${result.user.email}`);  // Success message
                         }
                         catch (error) {
                             const errorMessage = error.message;
                             console.log(errorMessage);
-                            toast.error(`Error!! Reason: ${errorMessage}`, { duration: 3000 });
+                            toast.error(`Error!! Reason: ${errorMessage}`, { duration: 3000 });  // Error message
                         }
-
-
-                        // console.log(User)
-                        // toast.success(`Authenticating as ${result.user.email}`)
-                        location?.search ? navigate(`${location?.search?.slice(1, location.search.length)}`) : navigate('/')
-
+                        location?.search ? navigate(`${location?.search?.slice(1, location.search.length)}`) : navigate('/');  // Navigate to appropriate route
                     })
                     .catch((error) => {
                         const errorMessage = error.message;
                         console.log(errorMessage);
-                        toast.error(`Error!! Reason: ${errorMessage}`, { duration: 3000 });
+                        toast.error(`Error!! Reason: ${errorMessage}`, { duration: 3000 });  // Error in user profile update
                     });
-
             })
             .catch((error) => {
                 const errorMessage = error.message;
-                console.log(errorMessage);
-                // toast.error(`${errorMessage}`)
+                console.log(errorMessage);  // Error in user creation
             });
     }
 
+    // Handle Google sign-in
     const handleGoogle = () => {
         GoogleSignUp()
             .then(result => {
-                toast.success(`Authenticating as ${result.user.email}`)
-                location?.search ? navigate(`${location?.search?.slice(1, location.search.length)}`) : navigate('/')
+                toast.success(`Authenticating as ${result.user.email}`);  // Success message for Google sign-in
+                location?.search ? navigate(`${location?.search?.slice(1, location.search.length)}`) : navigate('/');
             })
             .catch((error) => {
                 const errorMessage = error.message;
-                console.log(errorMessage);
+                console.log(errorMessage);  // Error in Google sign-in
                 toast.error(`Error!! Reason: ${errorMessage}`, { duration: 3000 });
             });
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     // State to toggle password visibility
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
+        setShowPassword(!showPassword);  // Toggle password field visibility
     };
-
     return (
         <div className="grid lg:grid-cols-2">
             {/* Left form section */}

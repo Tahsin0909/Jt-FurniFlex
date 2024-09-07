@@ -1,22 +1,27 @@
 import { useState } from "react";
-import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import useProducts from "../../hooks/useProducts";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md"; // Import icon for pagination arrow
+import useProducts from "../../hooks/useProducts"; // Custom hook to fetch products
 
-import ProductsSkeleton from "../../components/productsCardSkeleton/ProductsSkeleton";
-import ProductsCard from "../../components/productsCard/ProductsCard";
+import ProductsSkeleton from "../../components/productsCardSkeleton/ProductsSkeleton"; // Component to show loading state
+import ProductsCard from "../../components/productsCard/ProductsCard"; // Component to display product card
 
 const Products = () => {
 
+    // State to manage the currently selected filter category
     const [filter, setFilter] = useState("all");
 
-    const { productsData, productLoading } = useProducts()
+    // Fetch products data and loading state using the custom hook
+    const { productsData, productLoading } = useProducts();
 
-
+    // Filter the products based on the selected category
     const filteredProducts = filter === "all" ? productsData : productsData.filter(product => product.category === filter);
 
     return (
         <div>
+            {/* Filter and Products Section */}
             <div className="md:py-padding_lg py-padding_md lg:px-padding_xl  grid md:grid-cols-4 lg:grid-cols-6">
+                
+                {/* Sidebar for selecting product categories */}
                 <div className="flex md:flex-col flex-row gap-2 p-padding_md border-r border-gray-300">
                     <button
                         onClick={() => setFilter("all")}
@@ -44,9 +49,12 @@ const Products = () => {
                     </button>
 
                 </div>
+
+                {/* Product Listing Section */}
                 <div className="lg:col-span-5 md:col-span-3 mx-auto lg:mx-m_xl">
                     {
                         productLoading ? (
+                            // Show skeleton loaders when products are loading
                             <div>
                                 <ProductsSkeleton />
                                 <ProductsSkeleton />
@@ -54,45 +62,29 @@ const Products = () => {
                                 <ProductsSkeleton />
                                 <ProductsSkeleton />
                             </div>
+                        ) : (
+                            // Show filtered products in a grid when data is loaded
+                            <div className="grid lg:grid-cols-3 grid-cols-1 items-center justify-evenly lg:gap-y-gap_primary md:gap-gap_primary gap-gap_primary">
+                                {filteredProducts.map((product) => (
+                                    <ProductsCard key={product.id} product={product} /> // Display product cards
+                                ))}
+                            </div>
                         )
-                            :
-                            (
-                                <div className="grid lg:grid-cols-3 grid-cols-1 items-center justify-evenly lg:gap-y-gap_primary md:gap-gap_primary gap-gap_primary">
-                                    {filteredProducts.map((product) => (
-                                        <ProductsCard key={product.id} product={product} />
-                                    ))}
-
-                                </div>
-                            )
                     }
-
                 </div>
             </div>
 
-
+            {/* Pagination Section */}
             <div className=" flex justify-center items-center md:pb-padding_lg pb-padding_md ">
                 <ul className="flex space-x-3 justify-center w-fit mx-auto">
-                    <li className="flex items-center justify-center cursor-not-allowed shrink-0  bg-gray-300 w-9 h-8 rounded">
-
-                    </li>
-                    <li className="flex items-center justify-center cursor-not-allowed shrink-0 border border-black  text-sm font-bold text-[#333] w-9 h-8 rounded">
-                        1
-                    </li>
-                    <li
-                        className="flex items-center justify-center cursor-not-allowed shrink-0 border border-footer_link  text-sm font-bold  w-9 h-8 rounded">
-                        2
-                    </li>
-                    <li className="flex items-center justify-center cursor-not-allowed shrink-0 border border-footer_link  text-sm font-bold text-[#333] w-9 h-8 rounded">
-                        ...
-                    </li>
-                    <li className="flex items-center justify-center cursor-not-allowed shrink-0 border border-footer_link  text-sm font-bold text-[#333] w-9 h-8 rounded">
-                        9
-                    </li>
-                    <li className="flex items-center justify-center cursor-not-allowed shrink-0 border border-footer_link  text-sm font-bold text-[#333] w-9 h-8 rounded">
-                        10
-                    </li>
+                    <li className="flex items-center justify-center cursor-not-allowed shrink-0  bg-gray-300 w-9 h-8 rounded"></li>
+                    <li className="flex items-center justify-center cursor-not-allowed shrink-0 border border-black  text-sm font-bold text-[#333] w-9 h-8 rounded">1</li>
+                    <li className="flex items-center justify-center cursor-not-allowed shrink-0 border border-footer_link  text-sm font-bold  w-9 h-8 rounded">2</li>
+                    <li className="flex items-center justify-center cursor-not-allowed shrink-0 border border-footer_link  text-sm font-bold text-[#333] w-9 h-8 rounded">...</li>
+                    <li className="flex items-center justify-center cursor-not-allowed shrink-0 border border-footer_link  text-sm font-bold text-[#333] w-9 h-8 rounded">9</li>
+                    <li className="flex items-center justify-center cursor-not-allowed shrink-0 border border-footer_link  text-sm font-bold text-[#333] w-9 h-8 rounded">10</li>
                     <li className="flex items-center justify-center cursor-not-allowed shrink-0  border  w-9 h-8 rounded border-footer_link">
-                        <MdOutlineKeyboardArrowRight size={20} className="text-footer_link" />
+                        <MdOutlineKeyboardArrowRight size={20} className="text-footer_link" /> {/* Arrow for next page */}
                     </li>
                 </ul>
             </div>
